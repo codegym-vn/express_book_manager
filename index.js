@@ -73,13 +73,14 @@ app.get("/book/detail", (req, res) => {
 })
 
 app.post("/book/delete", (req, res) => {
-  console.log(req.body);
-  const sql = "DELETE FROM books WHERE id = " + req.body.id;
+  console.log(req.query);
+  const sql = "DELETE FROM books WHERE id = " + req.query.id;
   connection.query(sql, function (err, result) {
     if (err) throw err;
-    res.json({status: 200, message: "delete success"})
+    res.redirect('/book/list')
   });
 })
+
 app.listen(PORT, () => {
   console.log("Server running on port:" + PORT);
 });
